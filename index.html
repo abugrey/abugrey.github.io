@@ -5,11 +5,12 @@
 </head>
 <body>
 
-<script>
-setInterval(function(){
-	var value = parseInt(document.getElementById('submain').innerHTML);
-	document.getElementById('submain').innerHTML = (value+1).toString();
-},1800000);
+<script type="text/javascript">
+	var i = 28;
+	function increment() {
+		i++;
+		document.getElementById ('number').innerHTML = i;}
+	setInterval('increment()', 1500);
 	
 </script>
 	

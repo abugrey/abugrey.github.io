@@ -30,6 +30,8 @@ var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //KeyCodes
 var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN=40;
 
+paused = false;
+
 var grid = {
 	width: null,
 	height: null,
@@ -76,6 +78,7 @@ var snake = {
 		return this._queue.pop();
 	}
 }
+
 
 function setFood() {
 	var empty = [];
@@ -127,11 +130,15 @@ function init() {
 }
 
 function loop() {
-	update();
 	draw();
-
+	if(!paused)
+	{
+	update();
+	}
 	window.requestAnimationFrame(loop, canvas);
 }
+
+
 
 function update() {
 	frames++;
@@ -185,9 +192,29 @@ function update() {
 
 		grid.set(SNAKE, tail.x, tail.y);
 
-		snake.insert(tail.x, tail.y);
+		snake.insert(nx, ny);
 	}
 }
+
+function togglePause()
+	{
+		if(!paused)
+		{
+			paused = true;
+		} else if (paused)
+		{
+			paused = false;
+		}
+	}
+
+	window.addEventListener('keydown', function (e){
+		var key = e.keyCode;
+		if (key === 80)
+	{
+		togglePause();
+	}
+
+	});
 
 function draw() {
 	var tw = canvas.width/grid.width;
